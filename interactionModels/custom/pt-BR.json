@@ -1,0 +1,243 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "assistente vera",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "olá",
+            "como vai você",
+            "diga oi mundo",
+            "diga oi",
+            "oi",
+            "diga olá mundo",
+            "diga olá"
+          ]
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AberturaChamadoIntent",
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "{titulo}",
+                "É {titulo}",
+                "Título do chamado é {titulo} ",
+                "O título do chamado é {titulo} "
+              ]
+            },
+            {
+              "name": "descricao",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "a descrição do chamado é {descricao}",
+                "é {descricao}",
+                "a descrição é {descricao}",
+                "{descricao}"
+              ]
+            },
+            {
+              "name": "tipo",
+              "type": "TicketType"
+            }
+          ],
+          "samples": [
+            "criar chamado",
+            "novo chamado",
+            "abrir chamado",
+            "abertura de chamado",
+            "abrir novo chamado",
+            "abertura de novo chamado",
+            "criação de chamado ",
+            "criar chamado {descricao}",
+            "novo chamado {descricao}",
+            "abrir chamado {descricao}",
+            "abrir novo chamado {descricao}",
+            "abertura de novo chamado {descricao}",
+            "criar chamado do tipo {tipo}",
+            "novo chamado do tipo {tipo}",
+            "abrir chamado do tipo {tipo}",
+            "abertura de chamado do tipo {tipo}",
+            "abrir novo chamado do tipo {tipo}",
+            "abertura de novo chamado do tipo {tipo}"
+          ]
+        },
+        {
+          "name": "VincularDispositivoIntent",
+          "slots": [],
+          "samples": [
+            "vincular essa alexa",
+            "vincular esse dispositivo",
+            "vincular esta alexa",
+            "vincular alexa",
+            "vincular este dispositivo",
+            "vincular dispositivo",
+            "vincular meu dispositivo"
+          ]
+        },
+        {
+          "name": "VerificarConexaoBaseIntent",
+          "slots": [],
+          "samples": [
+            "verificar base",
+            "verificar minha base",
+            "verificar conexão",
+            "verificar conexão com base"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "2",
+              "name": {
+                "value": "Requisição",
+                "synonyms": [
+                  "Requisições"
+                ]
+              }
+            },
+            {
+              "id": "1",
+              "name": {
+                "value": "Incidente",
+                "synonyms": [
+                  "Incidentes"
+                ]
+              }
+            }
+          ],
+          "name": "TicketType"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "AberturaChamadoIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.853733149963"
+          },
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.853733149963.83154892331"
+              }
+            },
+            {
+              "name": "descricao",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.853733149963.1658088051559"
+              }
+            },
+            {
+              "name": "tipo",
+              "type": "TicketType",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {},
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.853733149963.1616178917737.1254053219616"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Confirm.Intent.853733149963",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Você gostaria de adicionar um chamado com o título {titulo} e descrição {descricao} ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Deseja abrir um chamado com título {titulo} e descrição {descricao} ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.853733149963.1658088051559",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Informe a descrição do chamado"
+          },
+          {
+            "type": "PlainText",
+            "value": "O que está acontecendo?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Qual é a descrição do chamado?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.853733149963.83154892331",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Informe o título do chamado"
+          },
+          {
+            "type": "PlainText",
+            "value": "Qual o título que deseja para o chamado?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Qual o título do chamado?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.853733149963.1616178917737.1254053219616",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "O tipo de chamado deve ser Incidente ou Requisição"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "8"
+}
